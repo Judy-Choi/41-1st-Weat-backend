@@ -28,7 +28,6 @@ Hi, we are team 'Weat'! 🤗
 [👑 MJ Choi (Judy) (Project Manager)](https://github.com/Judy-Choi), [SW Park](https://github.com/Jetkick)
 
 <br>
-<br>
 
 ## 💻 Tech Stack
 Frond-End
