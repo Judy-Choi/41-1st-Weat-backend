@@ -112,8 +112,8 @@ Authorization and authentication using JWT
   - One of the most powerful function of TypeORM
   - It is easier to handle DB and more readable and efficient
 
-### Development completeness
-- When I tested my code, there were too many bugs 🐞
+### Prevent bugs 🐞
+- When I tested my code, there were too many bugs
 - 💡 In the development stage, test my code using Jest
 
 ### Spaghetti code 🍝
