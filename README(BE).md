@@ -4,7 +4,6 @@
 [👑 MJ Choi (Judy) (Project Manager)](https://github.com/Judy-Choi), [SW Park](https://github.com/Jetkick)
 
 <br>
-<br>
 
 ## 💻 Tech Stack
 
@@ -26,69 +25,108 @@ Common :
 <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&amp;logo=Postman Code&amp;logoColor=white">
 
 <br>
-<br>
 
 ## 🛠️ Dev Details
+### 🗄️ DataBase
+- DB design and implementation using ERD
+- Data management with MySQL WorkBench
+
+<br>
+
 ### 👨‍👩‍👧‍👦 Users
 #### Sign Up
-- Bcypt를 사용하여 비밀번호를 암호화하여 DB에 저장 (유저 정보를 안전하게?)
-- 정규표현식을 사용하여 비밀번호 규칙을 빠르게 체크 
+- Encrypt user's password using Bcrypt and save it to DB
+  - Manage user's account information more securely
+- Use regular expressions to check quickly if user's password follows password generation rules
 
 #### Login
-- 로그인 성공 시 서버에서 secret key 를 이용하여 JWT 생성
-- 로그인 후, 사용자 인증/인가에 패스워드 대신 JWT 를 이용하여 보안성 향상
+- When login is successful, the server uses secret key to generate JWT
+- After login, use JWT instead of password for user authentication/authorization (to improve security)
 
 <br>
 
 ### 🍖 Products
 #### Main page
+- Top 6 product data are extracted from DB (Sorted in descending order by sales volume)
+- Increase code reusability
+  - To minimize the repeated use of similar SQL queries on the Main and Category pages, duplicate queries are declared with the defaultQuery string only once and then more queries are added.
+
 #### Category page
-#### Detail page상세 페이지(한 상품 불러오기): 한 상품의 세부 정보들을 볼 수 있도록 함
+- Efficient request from FE by using query parameters
+- In order to support Page Nation of FE, only 6 data (per page) are extracted from DB and provided to FE.
+  - It also reduces traffic overload and execution time (prevent delivering too much data at once)
+
+#### Detail page
+- Provide the details of a particular product
+- (BE only) Developed product review API
 
 <br>
 
 ### 🛒 Carts
+- Authorization and authentication using JWT
+  - Verify logged-in user's JWT before all APIs are performed.
 
-모든 API에서 JWT 사용하여 유저 확인
+#### Add product to shopping cart / change quantity
+- Implementing INSERT and UPDATE simultaneously within one API and one query using 'UPSERT'
 
-장바구니 목록: 해당 유저의 장바구니 목록을 조회.
-장바구니 넣기: UPSERT 구문을 사용하여 한 쿼리 내에서 INSERT와 UPDATE가 동시에 이루어지도록 한 메소드 내에서 구현.
-수량 변경: 장바구니 내 상품의 수량이 변경되는 것이 DB에 바로 UPDATE 될 수 있도록 구현.
-장바구니 빼기: 한 개 혹은 한 개 이상의 상품을 장바구니에서 삭제하는 것을 한 메소드에서 구현.
+#### Lookup Shopping cart / delete product in the cart
+- Combine 'INNER JOIN' to get all information of the shopping cart with just one JWT (minimize information exposure and enhance security)
 
 <br>
 
 ### 💳 Orders
-모든 API에서 JWT 사용하여 유저 확인
-결제 완료: 주문이 이루어진 후의 쿼리들을 트랜잭션을 사용하여 DB 내 데이터의 CRUD가 부분적으로 실행되거나 중단되지 않도록 안정성을 보장.
-결제 취소: 결제 취소 후 환불까지의 쿼리를 트랜잭션을 사용하여 DB 데이터의 안정성을 보장.
-주문 목록: 해당 유저의 모든 주문 목록을 조회함.
+- Authorization and authentication using JWT
+  - Verify logged-in user's JWT before all APIs are performed.
 
-<br>
+#### Order/Payment
+- Use 'transaction' to ensure that CRUD of data in DB when it not partially executed or interrupted
+#### Order List Lookup
+- INNER JOIN queries are combined to allow users to view all order lists with only one order information (order ID) (minimize information exposure)
 <br>
 
 ## 📑 API Documentation
 [Postman Link](https://documenter.getpostman.com/view/24998473/2s8Z76x9km)
 
 <br>
-<br>
 
 ## 🤔 Future Works
+
+<details>
+    <summary>Read more</summary>
+    
 ### JWT is too weak...
 - Security risk can occur
->- 💡 We can use MFA / Refresh token
+  - 💡 We can use MFA / Refresh token
 
 ### Our DB are in each member's local...
 - Could not share same DB & Could not test our module in the same environment
->- 💡 Let's try AWS RDS or S3 next time!
+  - 💡 Let's try AWS RDS or S3 next time!
 
 ### Inefficient FE-BE connection test
 - Can run only one server at the same time
->- 💡 Change port number
 - We had to wait until our supervisor feedbacks to the pull request and merges to the main branch
 - There are many sub branches. So when we had some module test, we had to checkout sub branches often
->- Make test branch & merge all sub branches to the test branch
+  - 💡 Change port number
+  - 💡 Make test branch & merge all sub branches to the test branch
 
-### API 작성 
-- 현업에서는 MySQL 쌩짜(?) 로 안 짠다한것같은데?
->- 그거 이름이 뭐더라...
+### Create API using MySQL queries only  
+- I heard that developers don't develop using only MySQL queries...!? 👩‍💻
+  - 💡 MyBatis
+  - A framework to help with DB integration in Java (Spring)
+  - SQL Mapper framework most commonly used to develop query-based web applications
+  - We can use MyBatis with MySQL queries (there are many easy methods that MySQL does not have)
+  - Development with MyBatis is easier than using only MySQL
+  - 💡 Query Builder
+  - One of the most powerful function of TypeORM
+  - It is easier to handle DB and more readable and efficient
+
+### Development completeness
+- When I tested my code, there were too many bugs 🐞
+- 💡 In the development stage, test my code using Jest
+
+### Spaghetti code 🍝
+- My back-end co-worker couldn't easily understand my code (Sometimes... me too 😂)
+- 💡 Refactoring!
+  - ex) Separate code into classes (modular)
+  - ex) Change the method (API) name to make it more legible.
+</details>
