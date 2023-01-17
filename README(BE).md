@@ -31,8 +31,6 @@ Common :
 - DB design and implementation using ERD
 - Data management with MySQL WorkBench
 
-<br>
-
 ### 👨‍👩‍👧‍👦 Users
 #### Sign Up
 - Encrypt user's password using Bcrypt and save it to DB
@@ -42,8 +40,6 @@ Common :
 #### Login
 - When login is successful, the server uses secret key to generate JWT
 - After login, use JWT instead of password for user authentication/authorization (to improve security)
-
-<br>
 
 ### 🍖 Products
 #### Main page
@@ -60,11 +56,9 @@ Common :
 - Provide the details of a particular product
 - (BE only) Developed product review API
 
-<br>
-
 ### 🛒 Carts
-- Authorization and authentication using JWT
-  - Verify logged-in user's JWT before all APIs are performed.
+Authorization and authentication using JWT
+- Verify logged-in user's JWT before all APIs are performed.
 
 #### Add product to shopping cart / change quantity
 - Implementing INSERT and UPDATE simultaneously within one API and one query using 'UPSERT'
@@ -72,11 +66,9 @@ Common :
 #### Lookup Shopping cart / delete product in the cart
 - Combine 'INNER JOIN' to get all information of the shopping cart with just one JWT (minimize information exposure and enhance security)
 
-<br>
-
 ### 💳 Orders
-- Authorization and authentication using JWT
-  - Verify logged-in user's JWT before all APIs are performed.
+Authorization and authentication using JWT
+- Verify logged-in user's JWT before all APIs are performed.
 
 #### Order/Payment
 - Use 'transaction' to ensure that CRUD of data in DB when it not partially executed or interrupted
