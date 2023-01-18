@@ -103,12 +103,12 @@ Authorization and authentication using JWT
 
 ### Create API using MySQL queries only  
 - I heard that developers don't develop using only MySQL queries...!? 👩‍💻
-  - 💡 MyBatis
+- 💡 MyBatis
   - A framework to help with DB integration in Java (Spring)
   - SQL Mapper framework most commonly used to develop query-based web applications
   - We can use MyBatis with MySQL queries (there are many easy methods that MySQL does not have)
   - Development with MyBatis is easier than using only MySQL
-  - 💡 Query Builder
+- 💡 Query Builder
   - One of the most powerful function of TypeORM
   - It is easier to handle DB and more readable and efficient
 
